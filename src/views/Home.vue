@@ -1,9 +1,8 @@
 <template>
     <div class="home">
         <img alt="Vue logo" src="../assets/logo.png" />
-        <HelloWorld msg="Welcome to Your Vue.js App" />
 
-        <div class="card_wrapper">
+        <!-- <div class="card_wrapper">
             <div class="card" v-for="user in users" :key="user.user_id">
                 <div class="card_info">
                     <h3>Name: {{ user.username }}</h3>
@@ -11,18 +10,19 @@
                     <p>Type: {{ user.id_user_type }}</p>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+// import HelloWorld from "@/components/HelloWorld.vue";
+import { mapGetters } from "vuex";
 
 export default {
     name: "Home",
     components: {
-        HelloWorld
+        // HelloWorld
     },
 
     async mounted() {

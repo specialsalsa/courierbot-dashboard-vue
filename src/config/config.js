@@ -1,1 +1,1 @@
-export const API_URL = "https://courierbot-server.herokuapp.com/users";
+export const API_URL = "https://courierbot-server.herokuapp.com";

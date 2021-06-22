@@ -1,15 +1,18 @@
 <template>
     <div class="users">
-        <h1>Table of users in database</h1>
+        <h1 id="profileTitle">Table of users in database</h1>
         <div class="card_wrapper">
-            <ProfileCard
-                v-for="user in users"
-                :key="user.discord_user_id"
-                :image="user.avatar_url"
-                :username="user.username"
-                :userType="printUserType(user.id_user_type)"
-                :userID="user.discord_user_id"
-            />
+            <transition-group name="list" tag="p" appear>
+                <ProfileCard
+                    v-for="user in users"
+                    class="list-item"
+                    :key="user.discord_user_id"
+                    :image="user.avatar_url"
+                    :username="user.username"
+                    :userType="printUserType(user.id_user_type)"
+                    :userID="user.discord_user_id"
+                />
+            </transition-group>
             <!-- <div class="profile_card" v-for="user in users" :key="user.user_id">
                 <img :src="user.avatar_url" :alt="user.login" />
                 <div class="profile_card_info">
@@ -68,25 +71,25 @@ export default {
 <style scoped>
 .card_wrapper {
     display: grid;
-    row-gap: 1rem;
+    row-gap: 1.15rem;
 }
 
-.profile_card {
-    padding: 0.5rem 1rem;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
-        -10px -10px 20px rgba(0, 0, 0, 0.2);
-
-    display: flex;
-    align-items: center;
-    margin-left: 20%;
-    margin-right: 20%;
+h1#profileTitle {
+    text-align: center;
+    margin: 3rem 0;
 }
 
-.profile_card_info {
-    margin-left: 5rem;
+.list-enter-active {
+    transition: all 1s ease;
+}
 
-    text-align: left;
+.list-item {
+    margin-bottom: 1rem;
+}
+
+.list-enter,
+.list-leave-to {
+    opacity: 0;
+    transform: translateY(40px);
 }
 </style>

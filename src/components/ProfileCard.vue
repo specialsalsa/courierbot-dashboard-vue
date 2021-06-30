@@ -1,11 +1,14 @@
 <template>
     <!-- prettier-ignore -->
-    <div class="profile_card" @click="openProfile(userID, username)">
-        <img :src="image || 'https://cdn.logojoy.com/wp-content/uploads/20210422095037/discord-mascot.png'" :alt="username"/>
-        <div class="profile_card_info">
+    <div class="profile_card">
+        <img @click="openProfile(userID, username)" :src="image || 'https://cdn.logojoy.com/wp-content/uploads/20210422095037/discord-mascot.png'" :alt="username"/>
+        <div class="profile_card_info" @click="openProfile(userID, username)">
             <h3>{{ username }}</h3>
             <p>Type: <b>{{ userType }}</b></p>
             <p>ID: {{ userID }}</p>
+        </div>
+        <div class="delete_button_div">
+            <button class="delete_button" @click="openModal(userID)">Delete</button>
         </div>
     </div>
 </template>
@@ -27,7 +30,7 @@ export default {
             required: false
         },
         userID: {
-            type: String,
+            type: Number,
             required: true
         }
     },
@@ -38,10 +41,20 @@ export default {
             this.$store.commit("SET_SELECTED_USER_ID", {
                 id: userID
             });
-
             this.$router.push({
                 name: "Profile",
                 params: { name: username }
+            });
+        },
+
+        openModal(id) {
+            let modal = document.querySelector(".deleteModal");
+
+            modal.classList.add("show");
+            console.log(id);
+            // change the value of the selected user id in the store
+            this.$store.commit("SET_SELECTED_USER_ID", {
+                id: id
             });
         }
     }
@@ -66,6 +79,32 @@ export default {
     align-items: center;
     margin-left: 20%;
     margin-right: 20%;
+    transition: background-color 0.2s ease;
+}
+
+.profile_card:hover {
+    background-color: rgb(160, 160, 160);
+    transition: all 0.2s;
+}
+
+.profile_card_info {
+    padding-right: 50%;
+}
+
+.delete_button_div {
+    padding-right: 3.5%;
+    margin-left: auto;
+}
+
+.delete_button {
+    border-radius: 8px;
+    background-color: #6892bb;
+    color: white;
+    padding: 12px 12px;
+    /* box-shadow: 5px 5px 10px #303030a8; */
+    text-decoration: none;
+    font-family: inherit;
+    cursor: pointer;
 }
 
 img {
@@ -78,9 +117,12 @@ img {
     max-width: 100px;
 }
 
+h3 {
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.26);
+}
+
 .profile_card_info {
     margin-left: 5rem;
-    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.26);
     text-align: left;
 }
 

@@ -3,11 +3,13 @@
         <div id="nav">
             <router-link to="/">Home</router-link>
             |
-            <router-link to="/about">About</router-link>
-            |
             <router-link to="/users">List of users</router-link>
+            |
+            <router-link to="/AddUser">Add a user</router-link>
         </div>
-        <router-view />
+        <transition name="fade-users" mode="out-in">
+            <router-view />
+        </transition>
     </div>
 </template>
 
@@ -49,5 +51,15 @@ body {
     text-decoration: none;
     font-size: 1.15rem;
     margin: 0.5rem 1rem;
+}
+
+.fade-users-enter-active,
+.fade-users-leave-active {
+    transition: all 0.3s ease;
+}
+
+.fade-users-enter,
+.fade-users-leave-active {
+    opacity: 0;
 }
 </style>

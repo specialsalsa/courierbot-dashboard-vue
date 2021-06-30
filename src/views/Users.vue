@@ -1,6 +1,7 @@
 <template>
     <div class="users">
         <h1 id="profileTitle">Table of users in database</h1>
+        <DeleteModal :name="name.username" />
         <div class="card_wrapper">
             <transition-group name="list" tag="p" appear>
                 <ProfileCard
@@ -10,7 +11,7 @@
                     :image="user.avatar_url"
                     :username="user.username"
                     :userType="printUserType(user.id_user_type)"
-                    :userID="user.discord_user_id"
+                    :userID="user.user_id"
                 />
             </transition-group>
             <!-- <div class="profile_card" v-for="user in users" :key="user.user_id">
@@ -29,15 +30,26 @@
 <script>
 import { mapGetters } from "vuex";
 import ProfileCard from "@/components/ProfileCard.vue";
+import DeleteModal from "@/components/DeleteModal.vue";
 
 export default {
     name: "Home",
     components: {
-        ProfileCard
+        ProfileCard,
+        DeleteModal
     },
 
+    data: () => {
+        return {
+            user: ""
+        };
+    },
+
+    // mounted: where the template (html and css) starts being rendered
     async mounted() {
         try {
+            // dispatch is to call an action
+            // changes the state
             await this.$store.dispatch("setUsers");
         } catch (error) {
             console.log(error);
@@ -46,9 +58,15 @@ export default {
     },
 
     computed: {
-        ...mapGetters(["getUsers"]),
+        // methods that are reactive to changes
+        ...mapGetters(["getUsers", "getSelectedUserByID", "getSelectedUserID"]),
         users() {
+            // returns state.users from store
             return this.getUsers;
+        },
+
+        name() {
+            return this.getSelectedUserByID(this.getSelectedUserID);
         }
     },
 
@@ -91,5 +109,15 @@ h1#profileTitle {
 .list-leave-to {
     opacity: 0;
     transform: translateY(40px);
+}
+
+.fade-users-enter-active,
+.fade-users-leave-active {
+    transition: all 0.3s ease;
+}
+
+.fade-users-enter,
+.fade-users-leave-active {
+    opacity: 0;
 }
 </style>

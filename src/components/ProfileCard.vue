@@ -88,7 +88,7 @@ export default {
 }
 
 .profile_card_info {
-    padding-right: 50%;
+    padding-right: 40%;
 }
 
 .delete_button_div {

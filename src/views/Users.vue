@@ -1,7 +1,7 @@
 <template>
     <div class="users">
         <h1 id="profileTitle">Table of users in database</h1>
-        <DeleteModal :name="name.username" />
+        <DeleteModal :name="thisUser.username" />
         <div class="card_wrapper">
             <transition-group name="list" tag="p" appear>
                 <ProfileCard
@@ -34,15 +34,10 @@ import DeleteModal from "@/components/DeleteModal.vue";
 
 export default {
     name: "Home",
+
     components: {
         ProfileCard,
         DeleteModal
-    },
-
-    data: () => {
-        return {
-            user: ""
-        };
     },
 
     // mounted: where the template (html and css) starts being rendered
@@ -65,8 +60,10 @@ export default {
             return this.getUsers;
         },
 
-        name() {
-            return this.getSelectedUserByID(this.getSelectedUserID);
+        thisUser() {
+            return this.getSelectedUserByID(this.getSelectedUserID) != undefined
+                ? this.getSelectedUserByID(this.getSelectedUserID)
+                : "";
         }
     },
 

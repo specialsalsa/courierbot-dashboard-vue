@@ -29,7 +29,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .success_added_user_modal {
     position: fixed;
     padding: 20px;
@@ -43,6 +43,7 @@ export default {
     margin-bottom: 1.5vw;
     margin-right: 1.5vw;
     animation: fadein 1s ease;
+    box-shadow: 5px 5px 5px #1d1d1d;
 }
 
 .notificationFade-enter-active,

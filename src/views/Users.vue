@@ -1,5 +1,6 @@
 <template>
     <div class="users">
+        <SuccessAddedUserModal />
         <h1 id="profileTitle">Table of users in database</h1>
         <DeleteModal :name="thisUser.username" />
         <div class="card_wrapper">
@@ -7,7 +8,7 @@
                 <ProfileCard
                     v-for="user in users"
                     class="list-item"
-                    :key="user.discord_user_id"
+                    :key="user.user_id"
                     :image="user.avatar_url"
                     :username="user.username"
                     :userType="printUserType(user.id_user_type)"
@@ -31,13 +32,15 @@
 import { mapGetters } from "vuex";
 import ProfileCard from "@/components/ProfileCard.vue";
 import DeleteModal from "@/components/DeleteModal.vue";
+import SuccessAddedUserModal from "@/components/SuccessAddedUserModal.vue";
 
 export default {
     name: "Home",
 
     components: {
         ProfileCard,
-        DeleteModal
+        DeleteModal,
+        SuccessAddedUserModal
     },
 
     // mounted: where the template (html and css) starts being rendered
@@ -106,15 +109,5 @@ h1#profileTitle {
 .list-leave-to {
     opacity: 0;
     transform: translateY(40px);
-}
-
-.fade-users-enter-active,
-.fade-users-leave-active {
-    transition: all 0.3s ease;
-}
-
-.fade-users-enter,
-.fade-users-leave-active {
-    opacity: 0;
 }
 </style>

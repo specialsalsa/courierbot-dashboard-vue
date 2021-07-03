@@ -22,7 +22,8 @@ export default new Vuex.Store({
             kicked: null
         },
         updateUserStatus: null,
-        deleteUserStatus: null
+        deleteUserStatus: null,
+        addedUserModal: null
     },
     // where you mutate/change the value of the state
     mutations: {
@@ -51,6 +52,9 @@ export default new Vuex.Store({
         },
         SET_DELETE_USER_STATUS(state, payload) {
             state.deleteUserStatus = payload.status;
+        },
+        SET_ADDED_USER_MODAL(state, payload) {
+            state.addedUserModal = payload.addedUserModal;
         }
     },
     actions: {
@@ -94,7 +98,9 @@ export default new Vuex.Store({
         getUsers: state => state.users,
         getSelectedUserByID: state => id =>
             state.users.find(user => user.user_id === id),
-        getSelectedUserID: state => state.selectedUserID
+        getSelectedUserID: state => state.selectedUserID,
+        getAddedUsername: state => state.addUserForm.username,
+        getAddedUserModal: state => state.addedUserModal
     },
     plugins: [createPersistedState()],
     modules: {}

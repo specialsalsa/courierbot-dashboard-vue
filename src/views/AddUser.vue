@@ -87,6 +87,14 @@ export default {
             } catch (error) {
                 console.log(error);
             }
+            let addedUserModal = true;
+            this.$store.commit("SET_ADDED_USER_MODAL", {
+                addedUserModal: addedUserModal
+            });
+
+            this.$router.push({
+                name: "Users"
+            });
         }
     }
 };

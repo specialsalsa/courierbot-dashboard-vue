@@ -7,6 +7,7 @@
             <p>Type: <b>{{ userType }}</b></p>
             <p>ID: {{ userID }}</p>
         </div>
+        <div class="profile_card_middle" @click="openProfile(userID, username)"></div>
         <div class="delete_button_div">
             <button class="delete_button" @click="openModal(userID)">Delete</button>
         </div>
@@ -77,6 +78,7 @@ export default {
 
     display: flex;
     align-items: center;
+    justify-content: space-around;
     margin-left: 20%;
     margin-right: 20%;
     transition: background-color 0.2s ease;
@@ -88,12 +90,14 @@ export default {
 }
 
 .profile_card_info {
-    padding-right: 40%;
+    padding-right: auto;
+    width: auto;
 }
 
-.delete_button_div {
-    padding-right: 3.5%;
-    margin-left: auto;
+.profile_card_middle {
+    /* width: 50%; */
+    height: 120px;
+    flex-grow: 1;
 }
 
 .delete_button {
@@ -111,6 +115,7 @@ img {
     border-radius: 50%;
     /* border: 5px solid #303030; */
     box-shadow: 0px 0px 20px #303030a8;
+    margin: 0rem 2rem;
 }
 
 .profile_card img {
@@ -122,13 +127,22 @@ h3 {
 }
 
 .profile_card_info {
-    margin-left: 5rem;
+    /* margin-left: 5rem; */
     text-align: left;
 }
 
 @media screen and (max-width: 992px) {
     .profile_card_info {
-        font-size: 2rem;
+        font-size: 1.3rem;
+    }
+
+    .profile_card {
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+
+    .delete_button_div {
+        margin-left: auto;
     }
 }
 </style>

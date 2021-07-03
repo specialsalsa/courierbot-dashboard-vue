@@ -167,4 +167,15 @@ export default {
         opacity: 1;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .updateUserTitle {
+        margin-left: 30%;
+    }
+
+    .updateUserDiv {
+        margin-left: 30%;
+        margin-right: 30%;
+    }
+}
 </style>

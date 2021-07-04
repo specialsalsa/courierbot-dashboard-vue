@@ -25,6 +25,7 @@ export default {
         },
 
         async deleteUser() {
+            this.closePopup();
             try {
                 await this.$store.dispatch("deleteUser");
                 await this.$store.dispatch("setUsers");
@@ -32,8 +33,6 @@ export default {
                 console.log(error);
                 return error;
             }
-
-            this.closePopup();
         }
     }
 };

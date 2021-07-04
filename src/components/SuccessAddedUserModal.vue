@@ -1,6 +1,9 @@
 <template>
     <transition name="notificationFade">
         <div v-if="addedUserModal" class="success_added_user_modal">
+            <div class="button-div">
+                <button @click="closeNotification" class="x-button">x</button>
+            </div>
             <p>Successfully added user {{ username }}</p>
         </div>
     </transition>
@@ -25,6 +28,13 @@ export default {
         addedUserModal() {
             return this.getAddedUserModal;
         }
+    },
+    methods: {
+        closeNotification() {
+            this.$store.commit("SET_ADDED_USER_MODAL", {
+                addedUserModal: false
+            });
+        }
     }
 };
 </script>
@@ -32,7 +42,7 @@ export default {
 <style scoped>
 .success_added_user_modal {
     position: fixed;
-    padding: 20px;
+    padding: 5px 10px 10px 10px;
     border-radius: 10px;
     background-color: #466481;
     color: white;
@@ -54,6 +64,24 @@ export default {
 .notificationFade-enter,
 .notificationFade-leave-to {
     opacity: 0;
+}
+
+p {
+    margin-top: 7px;
+}
+
+.button-div {
+    text-align: right;
+}
+
+.x-button {
+    background: none !important;
+    border: none;
+    padding: 0 !important;
+    font-family: arial, sans-serif;
+    /*input has OS specific font-family*/
+    color: #fff;
+    cursor: pointer;
 }
 
 @keyframes fadein {

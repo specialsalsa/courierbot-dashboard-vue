@@ -13,7 +13,6 @@
 import { mapGetters } from "vuex";
 export default {
     mounted() {
-        console.log(this.getAddedUserModal);
         setTimeout(() => {
             this.$store.commit("SET_ADDED_USER_MODAL", {
                 addedUserModal: false
@@ -82,6 +81,10 @@ p {
     /*input has OS specific font-family*/
     color: #fff;
     cursor: pointer;
+}
+
+.x-button:hover {
+    text-decoration: underline;
 }
 
 @keyframes fadein {

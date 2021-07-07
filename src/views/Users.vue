@@ -2,11 +2,23 @@
     <div class="users">
         <SuccessAddedUserModal />
         <h1 id="profileTitle">Table of users in database</h1>
+
+        <div class="filters">
+            <input
+                type="text"
+                placeholder="Search users..."
+                v-model="searchInput"
+            />
+            <button class="order-alphabetically-button" @click="order = !order">
+                Order {{ order === false ? "Z-A" : "A-Z" }}
+            </button>
+        </div>
+
         <DeleteModal :name="thisUser.username" />
         <div class="card_wrapper">
             <transition-group name="list" tag="p" appear>
                 <ProfileCard
-                    v-for="user in users"
+                    v-for="user in searchForUsers"
                     class="list-item"
                     :key="user.user_id"
                     :image="user.avatar_url"
@@ -43,6 +55,16 @@ export default {
         SuccessAddedUserModal
     },
 
+    data: () => {
+        return {
+            searchInput: "",
+            filteredUsers: "",
+            order: false,
+            originalOrder: true,
+            awaitingSearch: false
+        };
+    },
+
     // mounted: where the template (html and css) starts being rendered
     async mounted() {
         try {
@@ -63,6 +85,10 @@ export default {
             return this.getUsers;
         },
 
+        searchForUsers() {
+            return this.filterAlphabetically(this.search(this.users));
+        },
+
         thisUser() {
             return this.getSelectedUserByID(this.getSelectedUserID) != undefined
                 ? this.getSelectedUserByID(this.getSelectedUserID)
@@ -81,6 +107,36 @@ export default {
             };
 
             return userTypeObject[userType];
+        },
+        compareName(a, b) {
+            if (a.username.toLowerCase() < b.username.toLowerCase()) return -1;
+            if (a.username.toLowerCase() > b.username.toLowerCase()) return 1;
+            else return 0;
+        },
+
+        compareName2(a, b) {
+            if (a.username.toLowerCase() > b.username.toLowerCase()) return -1;
+            if (a.username.toLowerCase() < b.username.toLowerCase()) return 1;
+            else return 0;
+        },
+
+        filterAlphabetically(users) {
+            if (!this.order) {
+                return [...users].sort(this.compareName);
+            } else {
+                return [...users].sort(this.compareName2);
+            }
+            // console.log(this.getUsers.sort(this.compareName));
+            // return this.getUsers.sort(this.compareName);
+        },
+
+        search(users) {
+            return users.filter(
+                user =>
+                    !user.username
+                        .toLowerCase()
+                        .indexOf(this.searchInput.toLowerCase())
+            );
         }
     }
 };
@@ -97,17 +153,43 @@ h1#profileTitle {
     margin: 3rem 0;
 }
 
-.list-enter-active {
-    transition: all 1s ease;
+.list-enter-active,
+.list-enter-to {
+    transition: all 0.7s ease-in-out;
 }
 
 .list-item {
     margin-bottom: 1rem;
+    transition: all 0.7s ease-in-out;
 }
 
-.list-enter,
-.list-leave-to {
+.order-alphabetically-button {
+    background-color: #466481;
+    color: white;
+    border: 2px thick #000;
+    border-radius: 5px;
+}
+
+.list-enter {
     opacity: 0;
+    transition: all 0.7s ease-in;
     transform: translateY(40px);
+}
+
+.filters {
+    margin-top: 5vh;
+    padding: 2rem 3rem;
+    border-radius: 8px;
+    margin: 0 20%;
+    background-color: rgb(138, 138, 138);
+
+    display: flex;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 992px) {
+    .filters {
+        margin: 0 5%;
+    }
 }
 </style>

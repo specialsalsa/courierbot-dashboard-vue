@@ -65,5 +65,35 @@ export const usersConfig = {
                 console.log(error);
                 return error;
             });
+    },
+
+    updatePrefix: async prefix => {
+        return await axios
+            .put(`${API_URL}/config/1`, {
+                command_prefix: prefix
+            })
+            .then(response => {
+                return {
+                    status: response.status
+                };
+            })
+            .catch(error => {
+                console.log(error);
+                return error;
+            });
+    },
+
+    getPrefix: async () => {
+        return await axios
+            .get(`${API_URL}/config/1`)
+            .then(response => {
+                return {
+                    config: response.data,
+                    status: response.status
+                };
+            })
+            .catch(error => {
+                console.log(error);
+            });
     }
 };

@@ -102,10 +102,12 @@ export default {
 
 .delete_button {
     border-radius: 8px;
-    background-color: #6892bb;
+    border: 4px thick;
+    background-color: #466481;
     color: white;
     padding: 12px 12px;
-    /* box-shadow: 5px 5px 10px #303030a8; */
+    margin-right: 2rem;
+    /* box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.432); */
     text-decoration: none;
     font-family: inherit;
     cursor: pointer;

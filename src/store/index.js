@@ -23,7 +23,10 @@ export default new Vuex.Store({
         },
         updateUserStatus: null,
         deleteUserStatus: null,
-        addedUserModal: null
+        addedUserModal: null,
+        prefixInput: null,
+        prefix: null,
+        serverID: 1
     },
     // where you mutate/change the value of the state
     mutations: {
@@ -55,6 +58,12 @@ export default new Vuex.Store({
         },
         SET_ADDED_USER_MODAL(state, payload) {
             state.addedUserModal = payload.addedUserModal;
+        },
+        SET_PREFIX_INPUT(state, payload) {
+            state.prefixInput = payload.prefixInput;
+        },
+        SET_PREFIX(state, payload) {
+            state.prefix = payload.config[0].command_prefix;
         }
     },
     actions: {
@@ -91,6 +100,15 @@ export default new Vuex.Store({
                 "SET_DELETE_USER_STATUS",
                 await usersConfig.deleteUser(state.selectedUserID)
             );
+        },
+        async updatePrefix({ commit, state }) {
+            commit(
+                "SET_PREFIX_INPUT",
+                await usersConfig.updatePrefix(state.prefixInput)
+            );
+        },
+        async updatePrefixConfig({ commit }) {
+            commit("SET_PREFIX", await usersConfig.getPrefix());
         }
     },
     getters: {
@@ -100,7 +118,8 @@ export default new Vuex.Store({
             state.users.find(user => user.user_id === id),
         getSelectedUserID: state => state.selectedUserID,
         getAddedUsername: state => state.addUserForm.username,
-        getAddedUserModal: state => state.addedUserModal
+        getAddedUserModal: state => state.addedUserModal,
+        getPrefix: state => state.prefix
     },
     plugins: [createPersistedState()],
     modules: {}

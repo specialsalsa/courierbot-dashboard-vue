@@ -9,6 +9,10 @@ export default new Vuex.Store({
     state: {
         a: 0,
         users: [],
+        serverInfo: {
+            memberCount: null,
+            botCount: null
+        },
         addUserForm: {
             username: null,
             kicked: null,

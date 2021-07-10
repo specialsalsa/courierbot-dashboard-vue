@@ -7,7 +7,7 @@
             |
             <router-link to="/AddUser">Add a user</router-link>
             |
-            <router-link to="/Playground">Playground</router-link>
+            <router-link to="/Dashboard">Dashboard</router-link>
         </div>
         <transition name="fade-users" mode="out-in">
             <router-view />

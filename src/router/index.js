@@ -31,9 +31,9 @@ const routes = [
         component: () => import("../views/AddUser.vue")
     },
     {
-        path: "/Playground",
-        name: "Playground",
-        component: () => import("../views/Playground.vue")
+        path: "/Dashboard",
+        name: "Dashboard",
+        component: () => import("../views/Dashboard.vue")
     }
 ];
 

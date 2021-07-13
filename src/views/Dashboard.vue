@@ -9,7 +9,10 @@
             <div class="online-members">
                 <h3>Online:&nbsp;</h3>
                 <transition name="blink-fade" mode="out-in">
-                    <h3 :key="serverInfo.onlineCount" class="onlineMembers">
+                    <h3
+                        :key="serverInfo.onlineCount"
+                        class="online-members-number"
+                    >
                         {{ serverInfo.onlineCount }}
                     </h3>
                 </transition>
@@ -24,7 +27,12 @@
             <form @submit.prevent="setPrefix()">
                 <label for="prefixTxt">Set prefix</label>
                 <br />
-                <input type="text" id="prefixText" v-model="prefixInput" />
+                <input
+                    type="text"
+                    id="prefixText"
+                    :key="currentPrefix"
+                    v-model="prefixInput"
+                />
                 <br />
                 <input type="submit" id="submitPrefix" value="Update" />
             </form>
@@ -46,7 +54,7 @@ export default {
     created() {
         let self = this;
         console.log("Starting connection to WebSocket Server");
-        this.connection = new WebSocket("ws://localhost:3033");
+        this.connection = new WebSocket("ws://courierbot.herokuapp.com");
 
         this.connection.onmessage = function (event) {
             self.serverInfo = JSON.parse(event.data);
@@ -107,19 +115,25 @@ h3 {
 
 .online-members {
     display: flex;
+    color: rgb(1, 185, 1);
+}
+
+.online-members-number {
+    color: rgb(1, 185, 1);
 }
 
 .update-prefix,
 .server-info {
     padding: 30px;
-    margin: 2rem 2rem;
+    margin: 2rem 1rem;
     background-color: #505050;
     color: #628db4;
-    border-radius: 1rem;
+    border-radius: 0.5rem;
     box-shadow: 5px 5px 10px #000;
 }
 
-.update-prefix:hover {
+.update-prefix:hover,
+.server-info:hover {
     border: 2px solid #fff;
     padding: 28px;
 }

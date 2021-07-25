@@ -162,5 +162,6 @@ input#submitPrefix {
     background-color: #628db4;
     border: none;
     border-radius: 3px;
+    cursor: pointer;
 }
 </style>

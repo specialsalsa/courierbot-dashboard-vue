@@ -1,7 +1,7 @@
 <template>
     <div class="hello">
         <div class="server-info">
-            <h3 class="totalMembers">
+            <h3 class="total-members">
                 Total Members:
                 {{ serverInfo.memberCount }}
             </h3>
@@ -17,7 +17,7 @@
                     </h3>
                 </transition>
             </div>
-            <h3 class="botMembers">
+            <h3 class="bot-members">
                 Bots:
                 {{ serverInfo.botCount }}
             </h3>
@@ -54,7 +54,7 @@ export default {
     created() {
         let self = this;
         console.log("Starting connection to WebSocket Server");
-        this.connection = new WebSocket("ws://courierbot.herokuapp.com");
+        this.connection = new WebSocket("ws://149.28.70.215:3033");
 
         this.connection.onmessage = function (event) {
             self.serverInfo = JSON.parse(event.data);
@@ -150,7 +150,7 @@ h3 {
 }
 
 input#prefixTxt {
-    background-color: #808080;
+    background-color: #8a8a8a;
     color: white;
     border: none;
     margin: 5px 0;

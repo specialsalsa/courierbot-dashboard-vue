@@ -21,6 +21,9 @@
                 Bots:
                 {{ serverInfo.botCount }}
             </h3>
+            <div>
+                <h3>Current prefix: {{ currentPrefix }}</h3>
+            </div>
         </div>
         <div class="update-prefix">
             <h3>Update prefix</h3>
@@ -130,6 +133,7 @@ h3 {
     color: #628db4;
     border-radius: 0.5rem;
     box-shadow: 5px 5px 10px #000;
+    animation: fadein 0.7s ease;
 }
 
 .update-prefix:hover,
@@ -163,5 +167,15 @@ input#submitPrefix {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+}
+
+@keyframes fadein {
+    0% {
+        opacity: 0;
+        margin-top: 100%;
+    }
+    100% {
+        opacity: 1;
+    }
 }
 </style>

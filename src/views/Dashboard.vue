@@ -38,6 +38,12 @@
                 />
                 <br />
                 <input type="submit" id="submitPrefix" value="Update" />
+                <p v-show="toggleSuccess" id="updated-prefix-text">
+                    Successfully updated prefix
+                </p>
+                <p v-show="toggleError" id="error-updating-prefix-text">
+                    Error updating prefix
+                </p>
             </form>
         </div>
     </div>
@@ -50,7 +56,9 @@ export default {
         return {
             prefixInput: null,
             serverInfo: {},
-            connection: null
+            connection: null,
+            toggleSuccess: false,
+            toggleError: false
         };
     },
 
@@ -93,7 +101,9 @@ export default {
 
             try {
                 await this.$store.dispatch("updatePrefix");
+                this.toggleSuccess = true;
             } catch (error) {
+                this.toggleError = true;
                 console.log(error);
                 return error;
             }
@@ -140,6 +150,18 @@ h3 {
 .server-info:hover {
     border: 2px solid #fff;
     padding: 28px;
+}
+
+#updated-prefix-text {
+    color: rgb(1, 185, 1);
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
+#error-updating-prefix-text {
+    color: red;
+    margin-bottom: 0;
+    margin-top: 20px;
 }
 
 .blink-fade-enter-active {

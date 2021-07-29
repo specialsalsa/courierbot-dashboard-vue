@@ -66,6 +66,10 @@ export default {
         };
     },
 
+    ready() {
+        window.addEventListener("beforeunload", this.refreshing);
+    },
+
     created() {
         let self = this;
         console.log("Starting connection to WebSocket Server");
@@ -78,6 +82,8 @@ export default {
         this.connection.onopen = function () {
             console.log("Successfully connected to the echo websocket server");
         };
+
+        window.addEventListener("beforeunload", this.refreshing);
     },
 
     async mounted() {
@@ -111,11 +117,15 @@ export default {
                 console.log(error);
                 return error;
             }
+        },
+
+        refreshing() {
+            this.connection.send("Remove listeners plz");
         }
     },
 
     destroyed() {
-        this.connection.send("Remove listeners");
+        this.connection.send("Remove listeners plz");
     }
 };
 </script>

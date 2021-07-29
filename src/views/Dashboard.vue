@@ -1,11 +1,12 @@
 <template>
     <div class="hello">
         <div class="server-info">
-            <h3 class="total-members">
-                Total Members:
-                {{ serverInfo.memberCount }}
-            </h3>
-
+            <div class="total-members">
+                <h3>Total Members:</h3>
+                <h3>
+                    {{ serverInfo.memberCount }}
+                </h3>
+            </div>
             <div class="online-members">
                 <h3>Online:&nbsp;</h3>
                 <transition name="blink-fade" mode="out-in">
@@ -17,12 +18,15 @@
                     </h3>
                 </transition>
             </div>
-            <h3 class="bot-members">
-                Bots:
-                {{ serverInfo.botCount }}
-            </h3>
-            <div>
-                <h3>Current prefix: {{ currentPrefix }}</h3>
+            <div class="bot-members">
+                <h3>Bots:</h3>
+                <h3 class="bot-members-count">
+                    {{ serverInfo.botCount }}
+                </h3>
+            </div>
+            <div class="current-prefix">
+                <h3>Current prefix:</h3>
+                <h3 class="current-prefix-symbol">{{ currentPrefix }}</h3>
             </div>
         </div>
         <div class="update-prefix">
@@ -129,6 +133,14 @@ h3 {
 .online-members {
     display: flex;
     color: rgb(1, 185, 1);
+    justify-content: space-between;
+}
+
+.total-members,
+.bot-members,
+.current-prefix {
+    display: flex;
+    justify-content: space-between;
 }
 
 .online-members-number {
@@ -144,6 +156,10 @@ h3 {
     border-radius: 0.5rem;
     box-shadow: 5px 5px 10px #000;
     animation: fadein 0.7s ease;
+}
+
+.server-info {
+    width: 12%;
 }
 
 .update-prefix:hover,
